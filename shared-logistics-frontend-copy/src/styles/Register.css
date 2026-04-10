@@ -1,0 +1,224 @@
+/* ===== Register Pages ===== */
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--bg-body);
+  position: relative;
+}
+
+.register-card {
+  display: flex;
+  width: 100%;
+  max-width: 920px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--border);
+}
+
+/* Left Panel */
+.register-left {
+  flex: 1;
+  background: var(--gradient-brand);
+  color: #fff;
+  padding: 52px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-left::before {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -30%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.register-left h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.register-left p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 300px;
+  opacity: 0.85;
+}
+
+.register-left .btn-alt {
+  padding: 10px 20px;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  background: transparent;
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  width: fit-content;
+}
+.register-left .btn-alt:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.6);
+}
+
+/* Right Panel - Form */
+.register-form {
+  flex: 1;
+  padding: 48px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg-card);
+  position: relative;
+}
+
+/* Progress Bar */
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: var(--border);
+  border-radius: 0 var(--radius-xl) 0 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.register-form h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+.register-form input,
+.register-form select {
+  margin: 8px 0;
+}
+
+/* Location section */
+.location-section {
+  margin: 16px 0;
+  padding: 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-input);
+  transition: all var(--transition);
+}
+
+.location-section:hover {
+  border-color: var(--primary);
+}
+
+.location-section p {
+  margin: 6px 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.success {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn-primary {
+  padding: 12px 20px;
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-inverse);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.btn-alt {
+  padding: 10px 16px;
+  border: 1.5px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-alt:hover {
+  background: var(--primary-light);
+}
+
+.form-nav {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.error {
+  color: var(--accent-red);
+  font-size: 12px;
+  margin-top: -4px;
+  margin-bottom: 4px;
+}
+
+.login-link {
+  margin-top: 20px;
+  font-size: 13px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+.login-link a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  .register-card {
+    flex-direction: column;
+    max-width: 480px;
+  }
+  .register-left, .register-form {
+    flex: unset;
+    width: 100%;
+  }
+  .register-left {
+    text-align: center;
+    align-items: center;
+    padding: 36px 24px;
+  }
+  .register-form {
+    padding: 32px 24px;
+  }
+}

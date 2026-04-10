@@ -1,0 +1,143 @@
+/* ===== SCROLL WRAPPER (IMPORTANT) ===== */
+.available-deliveries-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 90px; /* space for floating nav */
+}
+
+/* ===== Available Deliveries ===== */
+.available-deliveries {
+  padding: 4px;
+  max-width: 1100px;
+  margin: 0 auto;
+  color: var(--text-primary);
+}
+
+.available-deliveries h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* GRID */
+.deliveries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+/* CARD */
+.delivery-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.delivery-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+/* SUMMARY */
+.group-summary {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+/* INNER SCROLL (deliveries list) */
+.group-deliveries {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 160px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* DELIVERY ITEM */
+.delivery-item {
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  border-left: 3px solid var(--primary);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.delivery-item strong {
+  color: var(--text-primary);
+}
+
+.delivery-item .address {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: wrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* BUTTON */
+.delivery-card > button {
+  margin-top: 4px;
+  padding: 10px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--text-inverse);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.delivery-card > button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 32px;
+}
+
+/* ===== MOBILE IMPROVEMENTS ===== */
+@media (max-width: 640px) {
+
+  .available-deliveries {
+    padding: 2px;
+  }
+
+  .group-summary {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .delivery-card {
+    padding: 12px;
+  }
+
+  /* smoother scrolling on mobile */
+  .available-deliveries-wrapper,
+  .group-deliveries {
+    -webkit-overflow-scrolling: touch;
+  }
+}

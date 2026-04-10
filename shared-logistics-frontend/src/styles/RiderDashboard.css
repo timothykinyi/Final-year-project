@@ -1,0 +1,139 @@
+/* RiderDashboard.css */
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #007bff;
+  --primary-dark: #0056b3;
+  --bg-light: #f5f7fa;
+  --text-dark: #1a1a1a;
+  --text-light: #6c757d;
+  --white: #fff;
+  --shadow: 0 4px 12px rgba(0,0,0,0.08);
+  --radius: 12px;
+  --transition: all 0.3s ease;
+}
+
+/* Layout */
+.rider-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-light);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(135deg, #0046d5, #007bff, #00c6ff);
+  color: var(--white);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin: 20px 0;
+  text-align: center;
+  font-weight: 700;
+}
+
+.sidebar button {
+  background: var(--white);
+  color: var(--primary-dark);
+  border: none;
+  padding: 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  transition: var(--transition);
+}
+
+.sidebar button:hover {
+  background: #eaf2ff;
+}
+
+.sidebar ul {
+  list-style: none;
+  flex-grow: 1;
+}
+
+.sidebar ul li {
+  padding: 12px 15px;
+  margin: 6px 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 15px;
+}
+
+.sidebar ul li:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar ul li.active {
+  background: var(--white);
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 30px;
+  background: var(--bg-light);
+  overflow-y: auto;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 768px) {
+  .rider-dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .sidebar h2 {
+    display: none;
+  }
+
+  .sidebar button {
+    padding: 8px;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .sidebar ul {
+    display: flex;
+    gap: 10px;
+  }
+
+  .sidebar ul li {
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+    margin: 0;
+  }
+
+  .content {
+    padding: 15px;
+  }
+}

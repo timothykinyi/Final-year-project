@@ -1,0 +1,123 @@
+/* ===== Rider Analytics ===== */
+.analytics {
+  padding: 4px;
+  color: var(--text-primary);
+}
+
+.analytics h2 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.loading, .empty {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filters input[type="date"] {
+  max-width: 160px;
+}
+
+.filters button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  background: var(--primary);
+  color: var(--text-inverse);
+}
+
+.filters button.reset {
+  background: var(--accent-red);
+}
+
+.filters button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.analytics .card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all var(--transition);
+}
+
+.analytics .card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.analytics .card p {
+  margin: 4px 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.analytics .card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-top: 4px;
+  color: var(--text-primary);
+}
+
+.analytics .card .icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.icon.total { color: var(--primary); }
+.icon.success { color: var(--accent-green); }
+.icon.pending { color: var(--accent-amber); }
+.icon.earnings { color: #059669; }
+
+.charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.chart-box {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.chart-box h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .analytics-grid { grid-template-columns: 1fr 1fr; }
+}

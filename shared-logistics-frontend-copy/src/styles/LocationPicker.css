@@ -1,0 +1,172 @@
+/* ===== Location Picker ===== */
+.location-picker {
+  margin: 16px 0;
+  padding: 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  transition: all var(--transition);
+}
+
+.location-picker-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.location-icon {
+  color: var(--primary);
+  font-size: 18px;
+}
+
+.location-status {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: var(--bg-input);
+  border-radius: var(--radius-md);
+}
+
+.location-status.loading {
+  color: var(--accent-amber);
+}
+
+.location-status.detected {
+  color: var(--text-secondary);
+}
+
+/* Search */
+.location-search {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.location-search input {
+  flex: 1;
+  margin: 0;
+}
+
+.location-search button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--primary);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.location-search button:hover {
+  background: var(--primary-hover);
+}
+
+.location-search button:disabled {
+  opacity: 0.5;
+}
+
+/* Actions */
+.location-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.loc-btn-outline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.loc-btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+/* Map */
+.location-map-container {
+  height: 260px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.map-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  color: var(--text-secondary);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Confirm */
+.loc-confirm-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: var(--accent-green);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-top: 8px;
+}
+
+.loc-confirm-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.location-confirmed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #dcfce7;
+  color: #166534;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+[data-theme="dark"] .location-confirmed {
+  background: #052e16;
+  color: #86efac;
+}

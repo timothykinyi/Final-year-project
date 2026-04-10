@@ -1,0 +1,145 @@
+/* Wrapper & background */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #0047d521, #007bff89, #00c8ff9c);
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+}
+
+/* Animated background blobs */
+.bg-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: float 15s infinite linear;
+}
+
+.shape1 { width: 300px; height: 300px; top: -50px; left: -50px; background: #19497c; animation-delay: 0s;}
+.shape2 { width: 200px; height: 200px; bottom: -50px; right: -30px; background: #140083; animation-delay: 5s;}
+.shape3 { width: 250px; height: 250px; top: 100px; right: -60px; background: #0046d5; animation-delay: 10s;}
+
+@keyframes float {
+  0% { transform: translateY(0) translateX(0) rotate(0deg);}
+  50% { transform: translateY(-30px) translateX(30px) rotate(45deg);}
+  100% { transform: translateY(0) translateX(0) rotate(0deg);}
+}
+
+/* Glass card */
+.login-card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  background: white;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  z-index: 1;
+}
+/* linear-gradient(135deg, #5200d536, #0022ff, #00c8ff59); */
+
+/* Panels */
+.login-left, .login-right {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.login-left {
+  background: linear-gradient(135deg, #0046d5, #007bff, #00c6ff);
+}
+
+.login-left h1 { color: #fff; font-size: 28px; }
+.login-left p { color: #ddd; font-size: 14px; }
+
+/* Toggle */
+.login-toggle {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.toggle-pill {
+  position: absolute;
+  top: 0; left: 0;
+  width: 50%; height: 100%;
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  transition: left 0.3s ease;
+  z-index: 0;
+}
+
+.login-toggle button {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+  z-index: 1;
+  transition: color 0.3s;
+}
+.login-toggle button.active { color: #ffd000; }
+
+/* Animated icons */
+.icon-wrapper { display: flex; justify-content: center; align-items: center; margin-top: 20px; color: #fff; }
+
+/* Right panel */
+.login-right { background: rgba(255, 255, 255, 0.664); border-radius: 16px; padding: 30px; backdrop-filter: blur(10px); }
+
+/* Form */
+.login-form { width: 100%; max-width: 340px; }
+.login-form h2 { text-align: center; margin-bottom: 20px; color: #0046d5; }
+
+.input-group { position: relative; margin-bottom: 15px; }
+.input-group input { width: 100%; padding: 10px; border: 1px solid #212121; border-radius: 6px; background: transparent; color: #212121; }
+.input-group input:focus { outline: none; border-color: #007bff; box-shadow: 0 0 5px rgba(0,123,255,0.3);}
+.input-group label { position: absolute; top: 12px; left: 10px; color: #212121; font-size: 13px; pointer-events: none; transition: 0.3s;}
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label { top: -10px; font-size: 11px; color: #005eff; }
+
+.options { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px; color: #212121; }
+.options a { color: #007bff; text-decoration: none; }
+
+.btn-primary { width: 100%; padding: 11px; border: none; border-radius: 6px; font-weight: bold; background: linear-gradient(135deg,#007bff,#0046d5); color: #fff; cursor: pointer; transition: 0.3s; }
+.btn-primary:hover { background: linear-gradient(135deg,#0056b3,#003399); transform: scale(1.03); }
+
+.error { color: #f87171; font-size: 12px; }
+.signup-link { font-size: 12px; text-align: center; color: #212121; margin-top: 10px; }
+.signup-link a { color: #0008ff; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .login-card { flex-direction: column; max-width: 420px; }
+  .login-left, .login-right { flex: unset; width: 100%; padding: 30px 20px; text-align: center; }
+  .login-left h1 { font-size: 24px; }
+  .login-form h2 { font-size: 20px; }
+}
+
+

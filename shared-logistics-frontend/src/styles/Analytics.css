@@ -1,0 +1,62 @@
+.analytics-panel {
+  padding: 20px;
+}
+
+.analytics-title {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.overview-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.overview-card h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.overview-card p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 5px 0 0;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.chart-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.peak-card {
+  background: #ffe0b2;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: 600;
+}

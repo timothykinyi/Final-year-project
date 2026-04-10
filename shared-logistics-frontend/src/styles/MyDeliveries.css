@@ -1,0 +1,198 @@
+/* ===== Layout ===== */
+.my-deliveries {
+  padding: 1rem;
+  font-family: "Inter", sans-serif;
+  color: #2a2a2a;
+  background: #fafafa;
+  min-height: 100vh;
+}
+
+.my-deliveries h2 {
+  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #111;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  margin-top: 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ===== Grid ===== */
+.deliveries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.9rem;
+}
+
+/* ===== Delivery Card ===== */
+.delivery-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 0.83rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  min-height: 140px;
+}
+
+.delivery-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-card.delivered {
+  border: 1.5px solid #4caf50;
+  background: #f3fff5;
+  opacity: 0.95;
+}
+
+/* ===== Header ===== */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.card-header p {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #222;
+}
+
+.status-badge {
+  padding: 0.25rem 0.55rem;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+
+.status-assigned {
+  background: #e8f4ff;
+  color: #0066b2;
+}
+
+.status-in_transit {
+  background: #fff3cd;
+  color: #b36b00;
+}
+
+.status-delivered {
+  background: #e7fbe9;
+  color: #1b5e20;
+}
+
+/* ===== Info ===== */
+.delivery-card p {
+  margin: 0.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.82rem;
+  color: #444;
+}
+
+.delivery-fee {
+  font-weight: 600;
+  color: #111;
+}
+
+/* ===== Progress ===== */
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 0.6rem;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0.4rem 0 0.7rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2196f3, #21cbf3);
+  transition: width 0.4s ease;
+}
+
+/* ===== Actions ===== */
+.actions {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.actions button {
+  flex: 1;
+  padding: 0.45rem 0.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.actions button:first-child {
+  background: #1976d2;
+  color: #fff;
+}
+
+.actions button:last-child {
+  background: #0056b3;
+  color: #fff;
+}
+
+.actions button:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 600px) {
+  .my-deliveries {
+    padding: 0.7rem;
+  }
+
+  .deliveries-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+
+  .delivery-card {
+    padding: 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .card-header p {
+    font-size: 0.8rem;
+  }
+
+  .actions button {
+    font-size: 0.72rem;
+    padding: 0.35rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .deliveries-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,174 @@
+.create-order-component {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: #222;
+}
+
+.create-order-component h2 {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 18px;
+  color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Form wrapper */
+.order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Inputs */
+.order-form input {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  background: #f4f6f8;
+  transition: all 0.25s ease;
+}
+
+.order-form input:focus {
+  background: #fff;
+  outline: 2px solid #007bff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
+}
+
+/* Inline search field */
+.order-form .address-search {
+  display: flex;
+  gap: 10px;
+}
+
+.address-search input {
+  flex: 1;
+}
+
+.address-search .btn-alt {
+  flex-shrink: 0;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-alt {
+  padding: 14px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+/* Primary button */
+.btn-primary {
+  background: linear-gradient(135deg, #007bff, #0056d6);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0064d6, #0040a8);
+}
+
+/* Alt button */
+.btn-alt {
+  background: #eef1f4;
+  color: #333;
+}
+
+.btn-alt:hover {
+  background: #e2e6eb;
+}
+
+/* Map section */
+.map-section label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+  color: #444;
+}
+
+.map-section {
+  margin-top: 12px;
+}
+
+/* Map container */
+.map-section div {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Confirmation card */
+.confirm-card {
+  margin: 16px 0;
+  padding: 16px 18px;
+  background: rgba(247, 249, 251, 0.9);
+  border: 1px solid #e3e6ea;
+  border-radius: 16px;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.4s ease;
+}
+
+.confirm-card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* Responsive (mobile-first) */
+@media (max-width: 600px) {
+  .create-order-component {
+    margin: 10px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .create-order-component h2 {
+    font-size: 18px;
+  }
+
+  .btn-primary,
+  .btn-alt,
+  .order-form input {
+    font-size: 14px;
+    padding: 12px;
+    border-radius: 12px;
+  }
+}
+
+/* Fade in for confirmation card */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fix Leaflet map container */
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.map-wrapper {
+  height: 300px;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
