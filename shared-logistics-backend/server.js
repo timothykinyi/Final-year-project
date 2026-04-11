@@ -23,7 +23,7 @@ const adminRoutes = require("./routes/adminRoutes");
 // Middleware
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"], // React frontend in dev
+    origin: ["http://localhost:3000", "https://twendecontroll.web.app", "http://localhost:3001", "https://twendedeliver.web.app"], // React frontend in dev
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
@@ -45,7 +45,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: ["http://localhost:3000", "https://twendecontroll.web.app/", "https://twendedeliver.web.app", "http://localhost:3001"],
     methods: ["GET", "POST"],
     credentials: true,
   },
