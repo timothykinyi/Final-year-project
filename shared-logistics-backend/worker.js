@@ -61,10 +61,7 @@ const keepServerActive = (url) => {
   req.end();
 };
 
-setInterval(() => keepServerActive('https://esystem-x6fm.onrender.com/api/locations'), 720000);
-
-setInterval(() => keepServerActive('https://esystem-1zd8.onrender.com/api/locations'), 720000);
-setInterval(() => keepServerActive('https://esystem-1.onrender.com/api/wapp/sendmessage'), 720000);
+setInterval(() => keepServerActive('https://final-year-project-etga.onrender.com/api/auth/up'), 720000);
 
 
 setInterval(processPendingJobs, 60000);

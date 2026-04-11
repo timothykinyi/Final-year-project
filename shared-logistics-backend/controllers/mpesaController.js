@@ -92,7 +92,7 @@ exports.stkPushHandler = async (req, res) => {
       PartyA: formattedPhone, // Phone number to receive the STK push
       PartyB: businessShortCode,
       PhoneNumber: formattedPhone,
-      CallBackURL: "https://elosystemv1.onrender.com/api/newmpesa/callback",
+      CallBackURL: "https://final-year-project-etga.onrender.com/api/mesa/callback",
       AccountReference: `Delivery on Twende`,
       TransactionDesc: 'Payment for Order',
     }, {
@@ -146,7 +146,7 @@ exports.stkPushHandlerinternal = async (amount, mpesaNumber, deliveryId) => {
         PartyA: formattedPhone,
         PartyB: businessShortCode,
         PhoneNumber: formattedPhone,
-        CallBackURL: "https://elosystemv1.onrender.com/api/newmpesa/callback",
+        CallBackURL: "https://final-year-project-etga.onrender.com/api/mesa/callback",
         AccountReference: "Delivery on Twende",
         TransactionDesc: "Payment for Order",
       },
@@ -275,8 +275,8 @@ exports.b2cRequestHandler = async ( Phonenumber, amount) => {
           PartyB: formattedPhone,
           Remarks: "ok",
           occassion: "ok",
-          QueueTimeOutURL: "https://mydomain.com/b2c/queue/",
-          ResultURL: "https://mydomain.com/b2c/result/"
+          QueueTimeOutURL: "https://final-year-project-etga.onrender.com/api/mesa/queue",
+          ResultURL: "https://final-year-project-etga.onrender.com/api/mesa/result"
         } , {
         headers: { Authorization: "Bearer " + accessToken }
       });
