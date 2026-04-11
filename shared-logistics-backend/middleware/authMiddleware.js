@@ -6,9 +6,6 @@ const Admin = require("../models/admin");
 const protectAll = async (req, res, next) => {
   try {
     const token = req.cookies.token;
-    console.log("::::::::token:222:::::::::")
-    console.log(token)
-    console.log("::::::::token:::::2222:::::")
     if (!token) {
       return res.status(401).json({ message: "Not authorized" });
     }
