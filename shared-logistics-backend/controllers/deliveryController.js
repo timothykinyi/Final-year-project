@@ -9,7 +9,7 @@ exports.createDelivery = async (req, res) => {
     const { customerName, customerPhone, customerAddress, customerLocation, deliveryFee } = req.body;
 
     const delivery = await Delivery.create({
-      shop: req.shop._id,
+      shop: req.user._id,
       customerName,
       customerPhone,
       customerAddress,
@@ -28,7 +28,7 @@ exports.createDelivery = async (req, res) => {
 // @access  Private (shop only)
 exports.getDeliveriesByShop = async (req, res) => {
   try {
-    const deliveries = await Delivery.find({ shop: req.shop._id }).sort({ createdAt: -1 });
+    const deliveries = await Delivery.find({ shop: req.user._id }).sort({ createdAt: -1 });
     res.json(deliveries);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -42,7 +42,7 @@ exports.filterDeliveries = async (req, res) => {
   try {
     const { status, paymentStatus } = req.query;
 
-    const query = { shop: req.shop._id };
+    const query = { shop: req.user._id };
     if (status) query.status = status;
     if (paymentStatus) query.paymentStatus = paymentStatus;
 
@@ -58,7 +58,7 @@ exports.filterDeliveries = async (req, res) => {
 // @access  Private (shop only)
 exports.cancelDelivery = async (req, res) => {
   try {
-    const delivery = await Delivery.findOne({ _id: req.params.id, shop: req.shop._id });
+    const delivery = await Delivery.findOne({ _id: req.params.id, shop: req.user._id });
 
     if (!delivery) return res.status(404).json({ message: "Delivery not found" });
     if (delivery.status !== "un_grouped") {

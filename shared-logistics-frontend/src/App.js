@@ -1,32 +1,37 @@
 // src/App.js
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import ShopLogin from "./pages/ShopLogin";
-import ShopRegister from "./pages/ShopRegister";
-import ShopDashboard from "./pages/ShopDashboard";
+import AdminLogin from "./pages/AdminLogin";
+import AdminRegister from "./pages/AdminRegister";
 import ProtectedRoute from "./components/ProtectedRoute";
-import RiderRegister from "./pages/RiderRegister";
-import RiderDashboard from "./pages/RiderDashboard";
-import TrackDelivery from "./components/TrackDelivery";
-import ClientTracking from "./pages/ClientTracking";
+import AdminLayout from "../../shared-logistics-frontend/src/pages/admin/AdminLayout";
+import AdminDashboard from "../../shared-logistics-frontend/src/pages/admin/AdminDashboard";
+import AdminUsers from "../../shared-logistics-frontend/src/pages/admin/AdminUsers";
+import AdminDeliveries from "../../shared-logistics-frontend/src/pages/admin/AdminDeliveries";
+import AdminTransactions from "../../shared-logistics-frontend/src/pages/admin/AdminTransactions";
+
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/shop/dashboard" replace />} />
-      <Route path="/shop/login" element={<ShopLogin />} />
-      <Route path="/shop/register" element={<ShopRegister />} />
-      <Route path="/rider/register" element={<RiderRegister />} />
-      <Route path="/rider/track" element={<TrackDelivery />} />
-      <Route path="/track/:deliveryId" element={<ClientTracking />} />
+      <Route path="/" element={<AdminLogin />} />
+
 
       {/* Protected shop routes */}
       <Route element={<ProtectedRoute />}>
-        <Route path="/shop/dashboard" element={<ShopDashboard />} />
-         <Route path="/rider/dashboard" element={<RiderDashboard />} />
-        
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="deliveries" element={<AdminDeliveries />} />
+          <Route path="transactions" element={<AdminTransactions />} />
+          <Route path="register" element={<AdminRegister />} />
+
+        </Route>
       </Route>
 
+              
+
+      
       {/* catch-all */}
       <Route path="*" element={<div className="p-6">404 - Not found</div>} />
     </Routes>

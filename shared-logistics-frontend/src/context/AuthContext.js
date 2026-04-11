@@ -5,63 +5,88 @@ import API from "../services/api";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const raw = localStorage.getItem("user");
-    return raw ? JSON.parse(raw) : null;
-  });
-  const [token, setToken] = useState(() => localStorage.getItem("token") || null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (token) API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    else delete API.defaults.headers.common["Authorization"];
-  }, [token]);
+  // 🔁 Restore user on refresh
+    useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const res = await API.get("/api/auth/me");
+          setUser(res.data);
+        } catch (err) {
+          setUser(null);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-const login = async ({ email, phone, password, role = "shop" }) => {
-  try {
-    const endpoint = role === "shop" ? "/api/shops/login" : "/api/riders/login";
-    const payload = role === "shop" ? { email, password } : { phone, password };
+      fetchUser();
+    }, []);
 
-    const res = await API.post(endpoint, payload);
-    const tok = res.data.token;
-
-    // pick ID explicitly (works for both shop/rider)
-    const id = res.data._id || res.data.id;
-
-    // build user profile
-    const profile = {
-      ...(res.data.user || {}),
-      ...(res.data.rider || {}),
-      ...(res.data.shop || {}),
-      ...res.data,
-      role,
-      id, // make sure id is always there
-    };
-    delete profile.token;
-
-    // persist
-    localStorage.setItem("token", tok);
-    localStorage.setItem("user", JSON.stringify(profile));
-    setToken(tok);
-    setUser(profile);
-
-    return { ok: true };
-  } catch (err) {
-    return { ok: false, error: err.response?.data?.message || err.message };
-  }
-};
-
-  const logout = async () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setToken(null);
-    setUser(null);
+  const refreshUser = async () => {
+    try {
+      const res = await API.get("/api/auth/me");
+      setUser(res.data);
+    } catch (err) {
+      setUser(null);
+    }
   };
 
+  // 🔐 LOGIN
+  const login = async ({ email, password}) => {
+    try {
+    const endpoint = "/admin/login";
+    const payload = { email, password };
+
+    const res = await API.post(endpoint, payload);
+
+      // build profile
+      const profile = {
+        ...(res.data.rider || {}),
+        ...(res.data.shop || {}),
+        ...res.data,
+      };
+
+      setUser(profile);
+
+      return { ok: true };
+    } catch (err) {
+      return {
+        ok: false,
+        error: err.response?.data?.message || err.message,
+      };
+    }
+  };
+
+  // 🚪 LOGOUT
+  const logout = async () => {
+    try {
+      await API.post("/api/auth/logout"); // backend clears cookie
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUser(null);
+    }
+
+    return { ok: true };
+  };
+
+
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        logout,
+        refreshUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => useContext(AuthContext);
+

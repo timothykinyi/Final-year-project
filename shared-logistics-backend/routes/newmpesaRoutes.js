@@ -1,16 +1,17 @@
 const express = require("express"); 
 const router = express.Router();
 const mpesaController = require("../controllers/mpesaController");
+const { protectAll } = require("../middleware/authMiddleware");
 
-router.get("/access_token", mpesaController.getAccessTokenHandler);
-router.get("/stkpushold", mpesaController.stkPushHandler);
-router.post("/stkpush", mpesaController.stkPushHandler);
-router.post("/callback", mpesaController.stkPushCallbackHandler);
-router.get("/registerurl", mpesaController.registerURLHandler);
-router.get("/confirmation", mpesaController.confirmURLHandler);
-router.get("/validation", mpesaController.validateURLHandler);
-router.get("/b2curlrequest", mpesaController.b2cRequestHandlers);
-router.get("/b2c/queue", mpesaController.queue);
-router.get("/b2c/result", mpesaController.result);
+router.get("/access_token",protectAll,  mpesaController.getAccessTokenHandler);
+router.get("/stkpushold", protectAll, mpesaController.stkPushHandler);
+router.post("/stkpush", protectAll, mpesaController.stkPushHandler);
+router.post("/callback", protectAll, mpesaController.stkPushCallbackHandler);
+router.get("/registerurl", protectAll, mpesaController.registerURLHandler);
+router.get("/confirmation", protectAll, mpesaController.confirmURLHandler);
+router.get("/validation", protectAll, mpesaController.validateURLHandler);
+router.get("/b2curlrequest", protectAll, mpesaController.b2cRequestHandlers);
+router.get("/b2c/queue", protectAll, mpesaController.queue);
+router.get("/b2c/result", protectAll, mpesaController.result);
 
 module.exports = router; 

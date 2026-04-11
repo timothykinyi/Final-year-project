@@ -9,8 +9,8 @@ const ShopSchema = new mongoose.Schema(
     phone: { type: String, required: true, unique: true, },
     password: { type: String, required: true, minlength: 6, },
     address: { type: String, },
-
-    verificationCode: { type: String, required: true, },
+    active: { type: Boolean, default: true, },
+    verificationCode: { type: String, required: false, },
     isVerified: { type: Boolean, default: false, }, 
     passcode: { type: String, }, // for password reset
     
@@ -37,7 +37,6 @@ const ShopSchema = new mongoose.Schema(
       pendingDeliveries: { type: Number, default: 0 },
       totalRevenue: { type: Number, default: 0 }, // for when payments are tracked
     },
-    isVerified: { type: Boolean, default: false, },// later email/phone verification 
   },
   { timestamps: true }
 );

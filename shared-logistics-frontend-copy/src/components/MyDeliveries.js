@@ -8,7 +8,6 @@ import API from "../services/api";
 
 function MyDeliveries() {
   const [myDeliveries, setMyDeliveries] = useState([]);
-  const token = localStorage.getItem("token");
   const { showToast } = useToast();
   // store watcher + interval IDs per delivery
   const locationWatchers = useRef({});
@@ -35,12 +34,10 @@ function MyDeliveries() {
   // 🚀 Poll deliveries every 10s to auto-refresh
   useEffect(() => {
     let intervalId;
-    if (token) {
-      fetchMyDeliveries(); // fetch immediately
-      intervalId = setInterval(fetchMyDeliveries, 10000); // then poll every 10s
-    }
+    fetchMyDeliveries(); // fetch immediately
+    intervalId = setInterval(fetchMyDeliveries, 10000); // then poll every 10s
     return () => clearInterval(intervalId); // cleanup
-  }, [token]);
+  }, []);
 
   const updateDeliveryStatus = async (id, action) => {
     try {

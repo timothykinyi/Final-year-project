@@ -96,9 +96,7 @@ export default function ShopSettings() {
     try {
       await API.put("/api/shops/profile", profile);
 
-      const updatedUser = { ...user, ...profile };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-
+      await auth.refreshUser();
       showToast("success", "Profile updated successfully!");
     } catch (err) {
       showToast("error", err?.response?.data?.message || "Failed to update profile");

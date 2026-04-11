@@ -20,6 +20,7 @@ import { useToast } from "../context/ToastContext";
 
 export default function RiderSettings() {
   const { theme, setTheme } = useTheme();
+  const auth = useAuth();
   const { user } = useAuth();
   const { showToast } = useToast();
   // ---------------- STATE ----------------
@@ -111,8 +112,7 @@ export default function RiderSettings() {
     try {
       await API.put("/api/riders/profile", profile);
 
-      const updatedUser = { ...user, ...profile };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+      await auth.refreshUser();
       showToast("success", "Profile updated successfully!");
     } catch (err) {
       showToast("error", err?.response?.data?.message || "Failed to update profile");

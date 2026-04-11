@@ -5,96 +5,145 @@ import API from "../services/api";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const raw = localStorage.getItem("user");
-    return raw ? JSON.parse(raw) : null;
-  });
-  const [token, setToken] = useState(() => localStorage.getItem("token") || null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (token) API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    else delete API.defaults.headers.common["Authorization"];
-  }, [token]);
+  // 🔁 Restore user on refresh
+    useEffect(() => {
+      const fetchUser = async () => {
+        try {
+          const res = await API.get("/api/auth/me");
+          console.log("::::::::::::::::::::::::::::::::")
+          console.log("AuthContext fetchUser:", res.data);
+          setUser(res.data);
+        } catch (err) {
+          setUser(null);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-const login = async ({ email, phone, password, role = "shop" }) => {
-  try {
-    const endpoint = role === "shop" ? "/api/shops/login" : "/api/riders/login";
-    const payload = role === "shop" ? { email, password } : { phone, password };
+      fetchUser();
+    }, []);
 
-    const res = await API.post(endpoint, payload);
-    const tok = res.data.token;
+  const refreshUser = async () => {
+    try {
+      const res = await API.get("/api/auth/me");
+      setUser(res.data);
+    } catch (err) {
+      setUser(null);
+    }
+  };
 
-    // pick ID explicitly (works for both shop/rider)
-    const id = res.data._id || res.data.id;
+  // 🔐 LOGIN
+  const login = async ({ email, phone, password, role = "shop" }) => {
+    try {
+      const endpoint =
+        role === "shop" ? "/api/shops/login" : "/api/riders/login";
 
-    // build user profile
-    const profile = {
-      ...(res.data.user || {}),
-      ...(res.data.rider || {}),
-      ...(res.data.shop || {}),
-      ...res.data,
-      role,
-      id, // make sure id is always there
-    };
-    delete profile.token;
+      const payload =
+        role === "shop" ? { email, password } : { phone, password };
 
-    // persist
-    localStorage.setItem("token", tok);
-    localStorage.setItem("user", JSON.stringify(profile));
-    setToken(tok);
-    setUser(profile);
+      const res = await API.post(endpoint, payload);
 
-    return { ok: true };
-  } catch (err) {
-    return { ok: false, error: err.response?.data?.message || err.message };
-  }
-};
+      // build profile
+      const profile = {
+        ...(res.data.rider || {}),
+        ...(res.data.shop || {}),
+        ...res.data,
+        role,
+      };
 
+      setUser(profile);
+
+      return { ok: true };
+    } catch (err) {
+      return {
+        ok: false,
+        error: err.response?.data?.message || err.message,
+      };
+    }
+  };
+
+  // 🚪 LOGOUT
   const logout = async () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setToken(null);
-    setUser(null);
+    try {
+      await API.post("/api/shops/logout"); // backend clears cookie
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUser(null);
+    }
 
     return { ok: true };
   };
 
-
+  // 🔑 FORGOT PASSWORD
   const forgotPassword = async ({ email, role = "shop" }) => {
     try {
-      const endpoint = role === "shop" ? "/api/shops/forgot-password" : "/api/riders/forgot-password";
-      const payload = role === "shop" ? { email } : { phone: email }; // using email variable for both cases
+      const endpoint =
+        role === "shop"
+          ? "/api/shops/forgot-password"
+          : "/api/riders/forgot-password";
 
-      const res = await API.post(endpoint, payload);
+      const payload =
+        role === "shop" ? { email } : { phone: email };
+
+      await API.post(endpoint, payload);
 
       return { ok: true };
     } catch (err) {
-      return { ok: false, error: err.response?.data?.message || err.message };
+      return {
+        ok: false,
+        error: err.response?.data?.message || err.message,
+      };
     }
   };
 
-
-    const resetPassword = async ({email, code, newPassword, role = "shop" }) => {
+  // 🔁 RESET PASSWORD
+  const resetPassword = async ({
+    email,
+    code,
+    newPassword,
+    role = "shop",
+  }) => {
     try {
-      const endpoint = role === "shop" ? "/api/shops/reset-password" : "/api/riders/reset-password";
-      const payload = role === "shop" ? { email, code, newPassword } : { phone: email, code, newPassword }; // using email variable for both cases
+      const endpoint =
+        role === "shop"
+          ? "/api/shops/reset-password"
+          : "/api/riders/reset-password";
 
-      const res = await API.post(endpoint, payload);
+      const payload =
+        role === "shop"
+          ? { email, code, newPassword }
+          : { phone: email, code, newPassword };
+
+      await API.post(endpoint, payload);
 
       return { ok: true };
     } catch (err) {
-      return { ok: false, error: err.response?.data?.message || err.message };
+      return {
+        ok: false,
+        error: err.response?.data?.message || err.message,
+      };
     }
   };
-  
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, forgotPassword, resetPassword }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        logout,
+        forgotPassword,
+        resetPassword,
+        refreshUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
-
-
 
 export const useAuth = () => useContext(AuthContext);

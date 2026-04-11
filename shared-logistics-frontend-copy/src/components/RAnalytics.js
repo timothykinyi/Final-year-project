@@ -22,7 +22,7 @@ import API from "../services/api";
 function Analytics() {
   const [analytics, setAnalytics] = useState(null);
   const [range, setRange] = useState({ startDate: "", endDate: "" });
-  const token = localStorage.getItem("token");
+
   const { showToast } = useToast();
 
   const fetchAnalytics = async () => {

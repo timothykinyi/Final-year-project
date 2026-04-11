@@ -21,8 +21,8 @@ export default function Dashboard() {
   const [deliveries, setDeliveries] = useState([]);
   const [loadingDeliveries, setLoadingDeliveries] = useState(false);
   const auth = useAuth();
-  const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { user } = useAuth();
+
   const shopId = user?.id || user?._id;
 
   const fetchDeliveries = async (filters = {}) => {
@@ -62,7 +62,7 @@ export default function Dashboard() {
   const renderContent = () => {
     switch (activeTab) {
       case "orders":
-        return <CreateOrder token={token} />;
+        return <CreateOrder/>;
 
       case "myorders":
         return (
@@ -71,7 +71,6 @@ export default function Dashboard() {
               deliveries={deliveries}
               loading={loadingDeliveries}
               fetchDeliveries={fetchDeliveries}
-              token={token}
             />
           </>
         );
@@ -87,7 +86,7 @@ export default function Dashboard() {
         return <ShopSettings />;
 
       default:
-        return <CreateOrder token={token} />;
+        return <CreateOrder/>;
     }
   };
 

@@ -25,9 +25,11 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="/shop/dashboard" element={<ShopDashboard />} />
          <Route path="/rider/dashboard" element={<RiderDashboard />} />
-        
+
       </Route>
 
+
+        
       {/* catch-all */}
       <Route path="*" element={<div className="p-6">404 - Not found</div>} />
     </Routes>

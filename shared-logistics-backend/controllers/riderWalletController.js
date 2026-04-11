@@ -7,7 +7,7 @@ const { b2cRequestHandler } = require("./mpesaController");
 // =======================
 exports.withdrawMoney = async (req, res) => {
   try {
-    const riderId = req.user.id; // from auth middleware
+    const riderId = req.user._id; // from auth middleware
     const { phone, amount, password } = req.body;
 
     // Basic validation
@@ -82,7 +82,7 @@ exports.withdrawMoney = async (req, res) => {
 // =======================
 exports.getTransactions = async (req, res) => {
   try {
-    const riderId = req.user.id;
+    const riderId = req.user._id;
 
     const transactions = await Transaction.find({ rider: riderId })
       .sort({ createdAt: -1 });

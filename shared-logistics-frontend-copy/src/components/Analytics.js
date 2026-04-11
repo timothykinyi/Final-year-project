@@ -22,7 +22,6 @@ function Analytics({ shopId }) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const token = localStorage.getItem("token");
 
   const fetchAnalytics = async () => {
     setLoading(true);
@@ -65,6 +64,16 @@ function Analytics({ shopId }) {
         />
         <button className="btn-alt" onClick={fetchAnalytics}>
           Apply
+        </button>
+         <button
+          className="reset"
+          onClick={() => {
+            setStartDate("")
+            setEndDate("")
+            fetchAnalytics();
+          }}
+        >
+          Reset
         </button>
       </div>
 

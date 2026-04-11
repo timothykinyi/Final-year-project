@@ -31,9 +31,6 @@ const processPendingJobs = async () => {
 
                 if (delivery) {
                     delivery.paymentStatus = "paid";
-                    const number = delivery.rider.phone;
-
-                    await b2cRequestHandler( amountpaid, number);
                     await delivery.save();
 
                     console.log(`Processed job for order ${checkoutId}`);

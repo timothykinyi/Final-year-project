@@ -1,0 +1,189 @@
+/* Container */
+.admin-users {
+  padding: 20px;
+}
+
+/* Title */
+.admin-users h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Table Wrapper (for responsiveness) */
+.table-wrapper {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+/* Header */
+thead {
+  background: #f8f9fb;
+}
+
+thead th {
+  text-align: left;
+  padding: 14px;
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+}
+
+/* Rows */
+tbody tr {
+  border-top: 1px solid #eee;
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: #f9fafc;
+}
+
+/* Cells */
+td {
+  padding: 14px;
+  font-size: 14px;
+}
+
+/* Role Badge */
+.role {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.role.shop {
+  background: #e6f4ff;
+  color: #007bff;
+}
+
+.role.rider {
+  background: #e8fff3;
+  color: #00a86b;
+}
+
+/* Status Badge */
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status.active {
+  background: #e8fff3;
+  color: #00a86b;
+}
+
+.status.blocked,
+.status.suspended {
+  background: #ffe8e8;
+  color: #d93025;
+}
+
+/* Button */
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #333;
+}
+
+button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  .admin-users {
+    padding: 10px;
+  }
+
+  table {
+    font-size: 13px;
+  }
+
+  td,
+  th {
+    padding: 10px;
+  }
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tabs button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.tabs button.active {
+  background: #111;
+  color: white;
+}
+
+.tabs button:hover {
+  background: #d1d5db;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 0;
+}
+
+.pagination button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #111;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.pagination button:hover {
+  background: #333;
+}
+
+.pagination button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  color: #555;
+}

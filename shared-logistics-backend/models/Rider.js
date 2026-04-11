@@ -19,7 +19,7 @@ const riderSchema = new mongoose.Schema(
         required: true,
       },
     },
-
+    active: { type: Boolean, default: true, },
     verificationCode: { type: String, required: false, },
     isVerified: { type: Boolean, default: false, }, 
     passcode: { type: String, }, // for password reset

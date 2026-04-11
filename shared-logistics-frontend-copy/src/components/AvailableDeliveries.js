@@ -6,7 +6,6 @@ import API from "../services/api";
 
 function AvailableDeliveryGroups() {
   const [groups, setGroups] = useState([]);
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchGroups = async () => {
@@ -24,8 +23,8 @@ function AvailableDeliveryGroups() {
       }
     };
 
-    if (token) fetchGroups();
-  }, [token]);
+    fetchGroups();
+  }, []);
 
   const acceptGroup = async (groupId) => {
     try {

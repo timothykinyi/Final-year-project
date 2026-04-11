@@ -5,13 +5,13 @@ const {
   filterDeliveries,
   cancelDelivery
 } = require("../controllers/deliveryController");
-const { protect } = require("../middleware/authMiddleware");
+const { protectAll } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.post("/", protect, createDelivery);
-router.get("/", protect, getDeliveriesByShop);
-router.get("/filter", protect, filterDeliveries);
-router.patch("/:id/cancel", protect, cancelDelivery);
+router.post("/", protectAll, createDelivery);
+router.get("/", protectAll, getDeliveriesByShop);
+router.get("/filter", protectAll, filterDeliveries);
+router.patch("/:id/cancel", protectAll, cancelDelivery);
 
 module.exports = router;

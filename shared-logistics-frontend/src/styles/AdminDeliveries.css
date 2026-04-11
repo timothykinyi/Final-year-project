@@ -1,0 +1,149 @@
+.deliveries-container {
+  padding: 24px;
+  background: #f6f8fb;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.deliveries-header {
+  margin-bottom: 20px;
+}
+
+.deliveries-header h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #1f2937;
+}
+
+.deliveries-header p {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.table-wrapper {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+.deliveries-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.deliveries-table thead {
+  background: #f3f4f6;
+}
+
+.deliveries-table th {
+  text-align: left;
+  padding: 12px;
+  font-size: 13px;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.deliveries-table td {
+  padding: 12px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #111827;
+}
+
+.deliveries-table tr:hover {
+  background: #f9fafb;
+  transition: 0.2s;
+}
+
+/* ID styling */
+.id-cell {
+  font-family: monospace;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Badges */
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge.paid {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge.unpaid {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Status styles */
+.status {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status.in_transit {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status.delivered {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.pagination button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.pagination button:hover {
+  background: #1d4ed8;
+}
+
+.pagination button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  color: #374151;
+}

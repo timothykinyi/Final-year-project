@@ -6,12 +6,12 @@ const {
   getTransactions,
 } = require("../controllers/riderWalletController");
 
-const { protectRider } = require("../middleware/authRider");
+const { protectAll } = require("../middleware/authMiddleware");
 
 // Withdraw
-router.post("/withdraw", protectRider, withdrawMoney);
+router.post("/withdraw", protectAll, withdrawMoney);
 
 // Get transactions
-router.get("/transactions", protectRider, getTransactions);
+router.get("/transactions", protectAll, getTransactions);
 
 module.exports = router;

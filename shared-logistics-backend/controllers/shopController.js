@@ -5,6 +5,7 @@ const {generateToken, generateAlphanumericVerificationCode} = require("../utils/
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const sendEmail = require('../services/emailServiceold');
+const setTokenCookie = require("../utils/setTokenCookie.js");
 
 // @desc    Register a new shop
 // @route   POST /api/shops/register
@@ -197,12 +198,17 @@ exports.loginShop = async (req, res) => {
     const shop = await Shop.findOne({ email });
 
     if (shop && (await shop.matchPassword(password))) {
+      const token = generateToken(shop._id);
+
+      // ✅ SET COOKIE
+      setTokenCookie(res, token);
+
       res.json({
         _id: shop._id,
         name: shop.name,
         ownerName: shop.ownerName,
         email: shop.email,
-        token: generateToken(shop._id),
+        role: "shop",
       });
     } else {
       res.status(401).json({ message: "Invalid email or password" });
@@ -219,7 +225,7 @@ exports.loginShop = async (req, res) => {
 // @access  Private
 exports.logoutShop = async (req, res) => {
   try {
-    const shop = req.shop;
+    const shop = req.user;
 
     if (!shop) {
       return res.status(400).json({ message: "No active shop session" });
@@ -468,7 +474,7 @@ exports.resetPassword = async (req, res) => {
 exports.updateShopProfile = async (req, res) => {
   try {
 
-    const shopId = req.shop.id;
+    const shopId = req.user._id;
 
     const { name, ownerName, address } = req.body;
     const user = await Shop.findById(shopId);
@@ -541,7 +547,7 @@ exports.updateShopProfile = async (req, res) => {
 // ---------------- UPDATE PASSWORD ----------------
 exports.updateShopPassword = async (req, res) => {
   try {
-    const shopId = req.shop.id;
+    const shopId = req.user._id;
     const { currentPassword, newPassword } = req.body;
 
     if (!currentPassword || !newPassword) {

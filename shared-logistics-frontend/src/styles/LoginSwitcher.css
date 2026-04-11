@@ -42,8 +42,7 @@
 .login-card {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  max-width: 900px;
+  width: 400px;
   border-radius: 16px;
   overflow: hidden;
   backdrop-filter: blur(20px);

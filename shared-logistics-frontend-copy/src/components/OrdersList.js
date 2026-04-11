@@ -25,8 +25,6 @@ function OrdersList() {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [cancelId, setCancelId] = useState(null);
 
-  const token = localStorage.getItem("token");
-
   const fetchDeliveries = async (filters = {}) => {
     setLoading(true);
     try {

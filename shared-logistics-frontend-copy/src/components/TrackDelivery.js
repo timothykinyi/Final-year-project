@@ -242,9 +242,8 @@ function TrackDelivery({ deliveryId }) {
   useEffect(() => {
     fetchInitial();
 
-    const token = localStorage.getItem("token");
     const socket = io(API_BASE, {
-      auth: { token },
+      withCredentials: true,
       transports: ["websocket"],
     });
     socketRef.current = socket;

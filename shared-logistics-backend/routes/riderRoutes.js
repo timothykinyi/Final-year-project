@@ -19,25 +19,35 @@ const {
 } = require("../controllers/riderController");
 
 
-const { protectRider } = require("../middleware/authRider");
+const { protectAll } = require("../middleware/authMiddleware");
+const logout = (req, res) => {
+  res.cookie("token", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
 
+  res.json({ message: "Logged out" });
+};
 
 // Auth routes
 router.post("/register", registerRider);
 router.post("/login", loginRider);
 
 // Rider-only routes (need JWT)
-router.get("/available-deliveries", protectRider, getAvailableDeliveries);
-router.get("/my-deliveries", protectRider, getMyDeliveries);
-router.get("/analytics", protectRider, getRiderAnalytics);
-router.put("/accept-delivery/:id", protectRider, acceptDelivery);
-router.put("/Deliveryintransit/:id", protectRider, Deliveryintransit);
-router.put("/Deliveryarrival/:id", protectRider, Deliveryarrival);
+router.get("/available-deliveries", protectAll, getAvailableDeliveries);
+router.get("/my-deliveries", protectAll, getMyDeliveries);
+router.get("/analytics", protectAll, getRiderAnalytics);
+router.put("/accept-delivery/:id", protectAll, acceptDelivery);
+router.put("/Deliveryintransit/:id", protectAll, Deliveryintransit);
+router.put("/Deliveryarrival/:id", protectAll, Deliveryarrival);
 
-router.post("/update-location/:deliveryId", protectRider, updateRiderLocation);
+router.post("/update-location/:deliveryId", protectAll, updateRiderLocation);
 router.get("/track/:id", trackDelivery);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword); 
-router.put("/profile", protectRider, updateRiderProfile);
-router.put("/update-password", protectRider, updateRiderPassword);
+router.put("/profile", protectAll, updateRiderProfile);
+router.put("/update-password", protectAll, updateRiderPassword);
+router.post("/logout", protectAll, logout);
+
+
 module.exports = router;

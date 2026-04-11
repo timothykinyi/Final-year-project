@@ -9,6 +9,7 @@ const {generateToken, generateAlphanumericVerificationCode} = require("../utils/
 const mongoose = require("mongoose");
 const validator = require("validator");
 const { checkPinById } = require('../services/KRA');
+const setTokenCookie = require("../utils/setTokenCookie.js");
 
 function formatPhoneNumber(phone) {
   if (!phone) return null;
@@ -183,6 +184,11 @@ exports.loginRider = async (req, res) => {
     const isMatch = await bcrypt.compare(password, rider.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
+    const token = generateToken(rider._id);
+
+    // ✅ SET COOKIE
+    setTokenCookie(res, token);
+
     res.json({
       message: "Login successful",
       rider: {
@@ -193,7 +199,7 @@ exports.loginRider = async (req, res) => {
         vehicleType: rider.vehicleType,
         isAvailable: rider.isAvailable,
       },
-      token: generateToken(rider._id),
+      role: "rider",
     });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
@@ -207,7 +213,7 @@ exports.loginRider = async (req, res) => {
 // =============================
 exports.getAvailableDeliveries = async (req, res) => {
   try {
-    const rider = await Rider.findById(req.user.id);
+    const rider = await Rider.findById(req.user._id);
     if (!rider) {
       console.log(":::Rider not found::::")
       return res.status(404).json({ message: "Rider not found" });
@@ -234,9 +240,7 @@ exports.getAvailableDeliveries = async (req, res) => {
       populate: { path: "shop rider" }, // populate details for each delivery
     });
 
-    console.log(":::gracefully  none::::")
-    console.log(groups)
-    console.log(":::gracefully  none::::")
+
     res.json({ available: groups || [] }); // ✅ fallback to empty array
   } catch (error) {
     console.error("❌ Error fetching available delivery groups:", error);
@@ -256,7 +260,7 @@ exports.getAvailableDeliveries = async (req, res) => {
 // =============================
 exports.getMyDeliveries = async (req, res) => {
   try {
-    const deliveries = await Delivery.find({ rider: req.user.id });
+    const deliveries = await Delivery.find({ rider: req.user._id });
     res.json({ deliveries });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
@@ -270,7 +274,7 @@ exports.getMyDeliveries = async (req, res) => {
 // =============================
 exports.getRiderAnalytics = async (req, res) => {
   try {
-    const riderId = req.user.id;
+    const riderId = req.user._id;
     const rider = await Rider.findById(riderId);
     if (!rider) return res.status(404).json({ message: "Rider not found" });
     // Optional date filters
@@ -320,7 +324,7 @@ exports.getRiderAnalytics = async (req, res) => {
 
 exports.acceptDelivery = async (req, res) => {
   try {
-    const riderId = req.user.id;
+    const riderId = req.user._id;
     const { id } = req.params;
 
 
@@ -388,7 +392,7 @@ exports.acceptDelivery = async (req, res) => {
 
 exports.Deliveryintransit = async (req, res) => {
   try {
-    const riderId = req.user.id;
+    const riderId = req.user._id;
     const deliveryId = req.params.id;
 
     const rider = await Rider.findById(riderId);
@@ -416,7 +420,8 @@ exports.Deliveryintransit = async (req, res) => {
 
 exports.Deliveryarrival = async (req, res) => {
   try {
-    const riderId = req.user.id;
+    console.log(":::mark delivery as delivered::::")
+    const riderId = req.user._id;
     const deliveryId = req.params.id;
 
     const rider = await Rider.findById(riderId);
@@ -429,7 +434,7 @@ exports.Deliveryarrival = async (req, res) => {
       return res.status(400).json({ message: "Delivery is not in 'in_transit' state" });
     }
 
-    if (delivery.rider.toString() !== riderId) {
+    if (delivery.rider.toString() !== riderId.toString()) {
       return res.status(400).json({ message: "Delivery is not assigned to this rider" });
     }
 
@@ -665,7 +670,7 @@ exports.resetPassword = async (req, res) => {
 exports.updateRiderProfile = async (req, res) => {
   try {
 
-    const riderId = req.user.id;
+    const riderId = req.user._id;
 
 
     const { name, email, phone, vehicleType } = req.body;
@@ -741,7 +746,7 @@ exports.updateRiderProfile = async (req, res) => {
 // ---------------- UPDATE PASSWORD ----------------
 exports.updateRiderPassword = async (req, res) => {
   try {
-    const riderId = req.user.id;
+    const riderId = req.user._id;
     const { currentPassword, newPassword } = req.body;
 
     if (!currentPassword || !newPassword) {
